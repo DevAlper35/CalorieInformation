@@ -40,18 +40,7 @@ class FoodListFragment : Fragment() {
             Toast.makeText(this@FoodListFragment.context, "Yeniden Yüklendi", Toast.LENGTH_SHORT).show()
         }
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://raw.githubusercontent.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(FoodAPI::class.java)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val foodList = retrofit.getFood()
-            foodList.forEach{
-                println(it.foodName)
-            }
-        }
     }
 
     override fun onDestroyView() {
