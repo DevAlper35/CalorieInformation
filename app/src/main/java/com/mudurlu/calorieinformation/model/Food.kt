@@ -3,6 +3,7 @@ package com.mudurlu.calorieinformation.model
 import com.google.gson.annotations.SerializedName
 
 data class Food(
+
     @SerializedName("isim")
     val foodName: String?,
 

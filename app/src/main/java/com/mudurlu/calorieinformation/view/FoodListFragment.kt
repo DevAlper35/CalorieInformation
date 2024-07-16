@@ -7,6 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.mudurlu.calorieinformation.databinding.FragmentFoodListBinding
+import com.mudurlu.calorieinformation.service.FoodAPI
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 
 class FoodListFragment : Fragment() {
@@ -31,6 +38,19 @@ class FoodListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.swipeRefresh.setOnRefreshListener {
             Toast.makeText(this@FoodListFragment.context, "Yeniden Yüklendi", Toast.LENGTH_SHORT).show()
+        }
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://raw.githubusercontent.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(FoodAPI::class.java)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val foodList = retrofit.getFood()
+            foodList.forEach{
+                println(it.foodName)
+            }
         }
     }
 
