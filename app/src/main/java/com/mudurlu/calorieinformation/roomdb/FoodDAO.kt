@@ -1,7 +1,6 @@
 package com.mudurlu.calorieinformation.roomdb
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.mudurlu.calorieinformation.model.Food
@@ -9,7 +8,7 @@ import com.mudurlu.calorieinformation.model.Food
 
 
 @Dao
-interface foodDAO {
+interface FoodDAO {
 
     @Insert
     suspend fun insertAll(vararg food : Food) : List<Long>
